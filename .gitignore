@@ -1,6 +1,4 @@
-*.aux
-*.log
-*.pdf
-*.gz
-*.toc
+*
+!*.tex
+!*.bib
 
