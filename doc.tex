@@ -4,6 +4,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+\bibliographystyle{alpha}
+
 \begin{document}
 
 \title{Explanation Architecture for Companion Systems}
@@ -19,19 +21,21 @@
 
 \section{Introduction}
 
-new technical systems with new functionality require willingness of user to cooperate with the system and use it the
+When users buy a new electronic device such as a smartphone, they often look at the advertised features listed on the box. Most pick out the few features that are important to themselves while others simply compare the length of the list. However even if a user buys a new smartphone for a new feature, the purchase does not come with an instant understanding of the feature. Once unpacked at home, the user is then faced with finding the feature and learning to use it – a task that is often not without its problems. If the hurdle is deemed too large, the new gadget is perceived to be a disappointment. Said frankly, you could say that the user is unwilling to cooperate with the device.
 
-way it is designed to be used
+Changing this is the main purpose of the paper "Explanation Architecture for Companion Systems"\cite{origin}. It expands on the idea of providing an explanation architecture, primarily for systems that offer a user dialogue. The aim of providing explanations is to strengthen a user's willingness to work with the system to solve problems or complete tasks. Apart from simply explaining new things to a user, such a system can also be used to cooperate with a user on tasks such as creating the user's calendar with given constraints such as time restrictions and travel times.
 
-explanation of companion systems
+The original paper concentrates on so-called companion systems. Companion systems are systems that assist a user in a multitude of day-to-day tasks, such as the aforementioned scheduling of appointments. However, the capabilities of a companion system do not stop there. Using a vast array of knowledge, these systems can also help a user with a new and unknown task, tasks that are out of a user's comfort zone. To make the most of such a system, this architecture is deployed using a range of modules, so as to make it easy to include any available device to help the user. However, the core system should be based upon a device that the user keeps with her the entire day. This could, for example, be a smartphone\footnote{TODO: Add an example? (attach beamer to smartphone for showing map or something like it?)}. It is important to point out that companion systems here are not understood to be static programs; instead, they attempt to adapt to a user's preferences, behavior, knowledge, and emotional state. Apart from that they can also adapt to external influences such as time of day, situation, and any other information at disposal to the system.
 
-goal of companion systems
+However, it must be asked whether such a system is even feasible at the current level of technology. The system developed in the original paper is a proof of concept to this. Every year new advances allow companion systems to evolve from simple programs presenting plain static information to a system capable of holding a dialogue with a user while reacting to any input it can get its hands on. To make such a dialogue more and more realistic it becomes progressively more important to include a way for the system to explain things to a user, be that to present a reason for a decision or to further the knowledge of a user. In the future such companion systems might well make decisions for a user completely autonomously, based only on gathered working knowledge of the user.
 
-why this work is useful
+The first issue that influences a cooperation between a user and the system is a user's knowledge of system features and capabilities. This can be done for example by adapting the user interface based upon whether the user is a novice or an expert, beyond simply providing helpful functions and tutorials.
 
-transparency of system increases productivity
+Another issue is when the system does something that the user can not comprehend because she lacks information or knowledge. This can be dangerous to the trust the user extends towards the system, as a decrease of transparency can have ill effects, such as a decrease of using the system down to not using the system at all. The reason for this is that humans tend to only accept someone's decisions only when the reasons behind them are clear to them. This is a byproduct of a human's natural autonomy. This leads the original paper to come to the conclusion that especially in companion systems, the issues surrounding trust between a user and the system are increasingly important to uphold a user's willingness to interact with the system, which might even prevent the companion system from being used at all.
 
 \section{Trust}
+
+In the introduction, we reflected upon the effect of trust between a user and a companion system. To understand the problem and the solution, it is important to understand what "trust" is in this context. Several definitions exist, but here we use the following: trust is when one party (referenced as the trustor) is thought to be in a vulnerable situation by relying completely upon the actions of a second party (referenced as the trustee). Trust is not only an aspect to consider when looking at human interactions; trust is also relevant for the interaction between a user and a system\footnote{TODO: Source?}.
 
 explain trust
 
@@ -96,5 +100,9 @@ affirm decision of why explanations are required and useful
 handling of trust issues needs to be refined
 
 important(?): explanations can be adapted by any module in the system to fit the need
+
+\newpage
+
+\bibliography{doc}
 
 \end{document}
