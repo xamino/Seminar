@@ -3,6 +3,8 @@
 \usepackage{a4wide}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{float}
 
 \bibliographystyle{alpha}
 
@@ -43,23 +45,28 @@ It becomes clear that one of the most elementary things a companion system can d
 
 For human trust relationships, the original paper references \cite{htc}. In it, trust is defined in three levels: ability, integrity, and benevolence. Ability describes the capacity to do something based on competencies, skills, and the characteristics of the trustee. Integrity describes perceived moral uprightness of the trustee by the trustor. Benevolence describes the disposition to do good for the trustor.
 
-For a human-system trust relationship, trust can be separated into nine basic constructs as seen in figure x\footnote{TODO: Insert figure here!}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{trust.png}
+	\caption{This is the human-system trust model upon which the original paper founds its explanations.}
+	\label{fig:hs_trust}
+\end{figure}
 
-user does not need knowledge about concepts used by the technical system, but about the process that leads to the decision or action of the technical system
+For a human-system trust relationship, trust can be separated into nine basic constructs as seen in Figure \ref{fig:hs_trust}. Note that four constructs are left out due to representative and discriminative issues. This gives us five basic constructs of trust with which to work. Concerning the overall perceived level of trust, all five constructs must be perceived to be high. If just a single one is low, the overall trustworthiness suffers. Given that we require working knowledge of the level of trust, we need to know the levels of trust that the trustor is perceiving. This proves to be difficult though because they can only be measured with a questionnaire, which is not something a companion system can do whenever trust must be measured.
 
-show and explain hierarchical model of trust (with 6 sub-groups)
+To enable a companion system to at least have a broad grasp of the measure of trust, the original paper employs reinforcement learning. With it, the system tries to find a solid trade-off between the exploitation of knowledge and the exploration of new aspects. Reinforcement learning is an area of machine learning that tries to teach a system to take actions based on the goal of a perceived reward. Here, the goal likely is a higher level of trust as recognized by the companion system.
+
+In the original paper, these decisions are made based on handcrafted policies, as a statistical approach is not viable due to a lack of data. In the future, these handcrafted policies can probably be replaced by data collected from a multitude of users, possibly in a non-static way so that the data is always expanding.
 
 \section{Countering Trust Issues}
 
-done with explanations here
+Given that we now have a measure of trust, the next step in solving a trust issue is how to counter it. In the original paper, this is done solely by applying explanations to a situation. Simply explaining everything is not the way to do that, however – too much explanations make the usage of a companion system more a hurdle than a plus, as they could lengthen the solving of a problem with unneeded dialogue. This means that we need to know two things: what problems a user will normally face while using a companion system and which events should trigger an explanation.
 
-used at corresponding issues
 
-explain match of which explanation helps against which trust issue
 
 \section{Explanations}
 
-explain explanation
+explain explanation (transfer of understanding in a dialogue system in which a questioner and a respondent take part)
 
 \subsection{Selecting Explanations}
 
