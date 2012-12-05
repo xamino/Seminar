@@ -27,7 +27,9 @@ When users buy a new electronic device such as a smartphone, they often look at 
 
 Changing this is the main purpose of the paper "Explanation Architecture for Companion Systems"\cite{origin}. It expands on the idea of providing an explanation architecture, primarily for systems that offer a user dialogue. The aim of providing explanations is to strengthen a user's willingness to work with the system to solve problems or complete tasks. Apart from simply explaining new things to a user, such a system can also be used to cooperate with a user on tasks such as creating the user's calendar with given constraints such as time restrictions and travel times.
 
-The original paper concentrates on so-called companion systems. Companion systems are systems that assist a user in a multitude of day-to-day tasks, such as the aforementioned scheduling of appointments. However, the capabilities of a companion system do not stop there. Using a vast array of knowledge, these systems can also help a user with a new and unknown task, tasks that are out of a user's comfort zone. To make the most of such a system, this architecture is deployed using a range of modules, so as to make it easy to include any available device to help the user. However, the core system should be based upon a device that the user keeps with her the entire day. This could, for example, be a smartphone\footnote{TODO: Add an example? (attach beamer to smartphone for showing map or something like it?)}. It is important to point out that companion systems here are not understood to be static programs; instead, they attempt to adapt to a user's preferences, behavior, knowledge, and emotional state. Apart from that they can also adapt to external influences such as time of day, situation, and any other information at disposal to the system.
+The original paper concentrates on so-called companion systems. Companion systems are systems that assist a user in a multitude of day-to-day tasks, such as the aforementioned scheduling of appointments. However, the capabilities of a companion system do not stop there. Using a vast array of knowledge, these systems can also help a user with a new and unknown task, tasks that are out of a user's comfort zone. To make the most of such a system, this architecture is deployed using a range of modules, so as to make it easy to include any available device to help the user. However, the core system should be based upon a device that the user keeps with her the entire day. This could, for example, be a smartphone. This could work when every device is publicly available on a wireless link within a room, allowing a smartphone to utilize any broadcasting devices as peripheral, allowing for example that content is streamed from the smartphone to a beamer when appropriate.
+
+It is important to point out that companion systems here are not understood to be static programs; instead, they attempt to adapt to a user's preferences, behavior, knowledge, and emotional state. Apart from that they can also adapt to external influences such as time of day, situation, and any other information at disposal to the system.
 
 However, it must be asked whether such a system is even feasible at the current level of technology. The system developed in the original paper is a proof of concept to this. Every year new advances allow companion systems to evolve from simple programs presenting plain static information to a system capable of holding a dialogue with a user while reacting to any input it can get its hands on. To make such a dialogue more and more realistic it becomes progressively more important to include a way for the system to explain things to a user, be that to present a reason for a decision or to further the knowledge of a user. In the future such companion systems might well make decisions for a user completely autonomously, based only on gathered working knowledge of the user.
 
@@ -37,7 +39,7 @@ Another issue is when the system does something that the user can not comprehend
 
 \section{Trust}
 
-In the introduction, we reflected upon the effect of trust between a user and a companion system. To understand the problem and the solution, it is important to understand what "trust" is in this context. Several definitions exist, with the following one being the one used most frequently: trust is when one party (referenced as the trustor) is thought to be in a vulnerable situation by relying completely upon the actions of a second party (referenced as the trustee). Trust is not only an aspect to consider when looking at human interactions; trust is also relevant for the interaction between a user and a system\footnote{TODO: Source?}. A definition of trust adapted to usage between a user and the system is: the extent to which a user is confident in, and willing to act on the basis of, the recommendations, actions, and decision of an artificially intelligent decision aid\cite{htc}. This definition is used because it includes but distinguishes between both the user's confidence in a system and the user's willingness to use the system to solve a problem.
+In the introduction, we reflected upon the effect of trust between a user and a companion system. To understand the problem and the solution, it is important to understand what "trust" is in this context. Several definitions exist, with the following one being the one used most frequently: trust is when one party (referenced as the trustor) is thought to be in a vulnerable situation by relying completely upon the actions of a second party (referenced as the trustee). Trust is not only an aspect to consider when looking at human interactions; trust is also relevant for the interaction between a user and a system. A definition of trust adapted to usage between a user and the system is: the extent to which a user is confident in, and willing to act on the basis of, the recommendations, actions, and decision of an artificially intelligent decision aid\cite{htc}. This definition is used because it includes but distinguishes between both the user's confidence in a system and the user's willingness to use the system to solve a problem.
 
 Companion systems of course contain decision aid systems, but they can do even more. Simply showing information as happens with a help function does not necessarily solve the problem of an uncooperative user. This is because to understand a decision or an action the system has taken, the user does not need an understanding of the concepts involved, instead she requires an understanding of the process that lead to the decision or action. That is a fine but important distinction; not the knowledge behind the decision, but the reasons for the decision are important. This shows that not the unknown quality of a companion systems knowledge is important for trusting, but the reasoning based on the knowledge.
 
@@ -62,27 +64,29 @@ In the original paper, these decisions are made based on handcrafted policies, a
 
 Given that we now have a measure of trust, the next step in solving a trust issue is how to counter it. In the original paper, this is done solely by applying explanations to a situation. Simply explaining everything is not the way to do that, however – too much explanations make the usage of a companion system more a hurdle than a plus, as they could lengthen the solving of a problem with unneeded dialogue. This means that we need to know two things: what problems a user will normally face while using a companion system and which events should trigger an explanation.
 
-
+We also have to match the different types of trust concepts to the explanations, so that the positive effect can be maximized when giving an explanation.
 
 \section{Explanations}
 
-To understand what the original paper is trying to do, it is necessary to know how explanations are viewed. The definition used is based off of Douglas Walton: a successful explanation is a transfer of understanding between a dialogue system in which a questioner and a respondent take part\cite{walton2004new}.
+To understand what the original paper is trying to do, it is necessary to know how explanations are viewed. The definition used is based off of Douglas Walton: a successful explanation is a transfer of understanding between a dialogue system in which a questioner and a respondent take part\cite{walton2004new}. 
 
 \subsection{Selecting Explanations}
 
-problem of selecting appropriate type of explanation
+When selecting an explanation, one must consider the goal of the explanation. There are five goals that the original paper lists.
 
-types of explanation can follow several or only one goal of explanation
+The first one is transparency. These type of explanations help the user understand how the companion system reached a given answer. This type can be used to counteract the perceived understandability of the system. A user would likely want such an explanation whenever the thought process is not apparent, either because the answer deviates from the expected outcome or when the answer is important enough to warrant that the user needs to know all the factors the system used in reaching the answer.
 
-strategies for selecting appropriate explanation
+Next is the goal of justification. Here, the user wants to be assured that the companions system has given a good, practical answer, and not just any one that would do. This explanation can be used to counter lack in perceived technical competence and perceived reliability. The system should give such an explanation when it is important for the user to understand that the system gave the best answer to a situation based on its knowledge.
 
-???
+Relevance is important to reassure the user that the companion system is aware of the context an answer was sought for in and that the answer is related. This goal of explanations can be used to counter the perceived reliability.
+
+Another goal for of explanations is conceptualization. This is used to clarify the meaning of concepts to a user. This goal can be utilized to strengthen the perceived reliability, technical competence, and understandability all at the same time. This goal most closely resembles the transfer of knowledge from the companion system to the user.
+
+The last goal of explanations is teaching. Here, the companion system aims to teach the user something on the domain of a problem or the domain of a given answer. This goal of explanation can be used to enrich the perceived understandability, as a broader user knowledge allows the system to appear more competent to her.
 
 \subsection{Where to Use Explanations}
 
-events that start the process of providing explanations
-
-done with knowledge base
+Apart from selecting the correct explanation, it is also important to know when to give an explanation. To do this successfully, we need a large knowledge base upon which the companion system can base its decisions.
 
 comparison of user knowledge base with conceptual knowledge required
 
