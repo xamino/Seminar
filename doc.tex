@@ -15,11 +15,12 @@
 \date{\today}
 
 \maketitle
-\newpage
 
-\tableofcontents
+\begin{abstract}
+In this paper, we take a look at how to strengthen the trust between a companion system and a user by utilizing explanations. These explanations should be constructed to fit the issue of trust at stake while acknowledging the user's own knowledge so that a learning effect can be achieved. We also look at how we can bring the system to give explanations without that the user asked for one in a dialogue, when appropriate.
+\end{abstract}
 
-\newpage
+\large
 
 \section{Introduction}
 
@@ -72,7 +73,14 @@ To understand what the original paper is trying to do, it is necessary to know h
 
 \subsection{Selecting Explanations}
 
-When selecting an explanation, one must consider the goal of the explanation. There are five goals that the original paper lists.
+When selecting an explanation, one must consider the goal of the explanation. There are five goals that the original paper lists. Figure \ref{fig:goals} shows an overview of them.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=8cm]{goals.png}
+	\caption{The goals of explanation.}
+	\label{fig:goals}
+\end{figure}
 
 The first one is transparency. These type of explanations help the user understand how the companion system reached a given answer. This type can be used to counteract the perceived understandability of the system. A user would likely want such an explanation whenever the thought process is not apparent, either because the answer deviates from the expected outcome or when the answer is important enough to warrant that the user needs to know all the factors the system used in reaching the answer.
 
@@ -84,37 +92,40 @@ Another goal for of explanations is conceptualization. This is used to clarify t
 
 The last goal of explanations is teaching. Here, the companion system aims to teach the user something on the domain of a problem or the domain of a given answer. This goal of explanation can be used to enrich the perceived understandability, as a broader user knowledge allows the system to appear more competent to her.
 
+As one can see, types of explanation can follow one or more goals of explanation – meaning we can counter multiple trust issues with a single explanation if we so wish.
+
 \subsection{Where to Use Explanations}
 
-Apart from selecting the correct explanation, it is also important to know when to give an explanation. To do this successfully, we need a large knowledge base upon which the companion system can base its decisions.
+Apart from selecting the correct explanation, it is also important to know when to give an explanation. To do this successfully, we need a large knowledge base upon which the companion system can base its decisions. We also need to know an approximation of how much the user knows – this is done with a user based knowledge graph which represents the knowledge the user has. By comparing the two, the companion system can then decide when and where explanations can be required.
 
-comparison of user knowledge base with conceptual knowledge required
+These knowledge graphs we utilize are of significant importance to how the companion system handles explanations, so let us take a better look at them. The knowledge base consists of the user profile, environmental information, and the dialog history. When in a dialog, the system can, based on the information saved in the knowledge graph, notice when the knowledge of the user is not sufficient enough for a situation. This can be used to trigger an explanation to impart knowledge on the user, allowing the knowledge graph of the user to fill the holes, so to speak.
 
-various aspects of knowledge graphs used
+However, the knowledge base of the user is not a static construct, unlike the knowledge graph of the companion system (apart from the fact that the companion system can simply update its knowledge at any time). This is due to human nature in that we forget things and that knowledge can fade over time. This brings a degree of uncertainty into the comparison between the two knowledge graphs.
 
-decay over time, etc...
+To counter this, we can simply have the knowledge graph decay over time. This leads towards a situation where information that is seldom used will be explained more often, as the companion system will know that the user will most likely not remember it. Information that is used more often however will only be repeated the first few times to cement it in the user's knowledge, allowing the companion system at some point in time to pass by the explanation as the user has successfully learned this information and can now utilize it herself.\footnote{TODO: Add example?}
 
 \section{Architecture}
 
-modular
+How would the software architecture for such an explanation capable companion system look like? The original paper proposes a modular approach as seen in Figure \ref{fig:architecture}.
 
-show / explain graph
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=10cm]{arch.png}
+	\caption{Overview of the proposed modular architecture for the companion architecture.}
+	\label{fig:architecture}
+\end{figure}
 
-using inter-system api modules can interact with each other
+A few important points lead to the decision for a modular architecture. For one, the use of a platform independent middle-ware for the communication layer between the modules allows for a greater flexibility in how the companion system works and where the modules run, which can be used to separate different parts of the companion system onto different platforms.
 
-each module works completely autark from others, only respond to events (like “need explanation”)
+As can be seen in Figure \ref{fig:architecture}, the explanation manager directly ties in with the dialogue manager. This is because explanations have little impact in how the companion system plans a task or with which media the dialogue is being conducted (these things are tasks of other modules, which in turn do not need to interface with the explanation manager in any way). Therefore, a connection to either the planning modules or the fission and fusion modules is not needed. The explanation machine itself is completely modality independent.
 
-[show path of explanation through system as summary?]
+Therefore, the dialogue manager is in charge of deciding when an explanation is required. The explanation manager then analyzes the explanation request based on how the user goals map to the explanation goals and, of course, on what content the user needs to have explained. Then it selects an appropriate explanation machine, which is then transformed to an explanation dialogue goal. All information that is required in these steps comes from the knowledge base of the companion system. The finished explanation is then passed back to the dialogue manager which builds it into the dialogue with the user.
 
 \section{Conclusion}
 
-affirm decision of why explanations are required and useful
+The conclusion of the original paper is that explanations are a viable way to counter trust issues. Not only is it possibly to implement such a companion system, it also works quite well. However, further research must be done, especially on the handling of trust issues so that the explanation pipeline can be further refined.
 
-handling of trust issues needs to be refined
-
-important(?): explanations can be adapted by any module in the system to fit the need
-
-\newpage
+In the future, a companion system as has been shown in this paper will certainly become more and more sophisticated. Once research has been made into how such a system could reliably measure the trust between the user and itself, the system will only become better and better at given explanations at the appropriate times. As could be seen, constructing explanations is not the main difficulty; instead, when to give an explanation when the user has not explicitly asked for one is the challenging part. The work of the original paper clearly goes towards teaching companion systems how to act on their own, at least in a dialogue with a user.
 
 \bibliography{doc}
 
