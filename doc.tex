@@ -10,7 +10,7 @@
 
 \begin{document}
 
-\Large
+\large
 
 \title{Explanation Architecture for Companion Systems}
 \author{Tamino Hartmann}
@@ -19,11 +19,9 @@
 \maketitle
 
 \begin{abstract}
-\large
+\normalsize
 In this paper, we take a look at how to strengthen the trust between a companion system and a user by utilizing explanations. These explanations should be constructed to fit the issue of trust at stake while acknowledging the user's own knowledge so that a learning effect can be achieved. We also look at how we can bring the system to give explanations without that the user asked for one in a dialogue, when appropriate.
 \end{abstract}
-
-%\large
 
 \section{Introduction}
 
@@ -33,9 +31,13 @@ Changing this is the main purpose of the paper "Explanation Architecture for Com
 
 The original paper concentrates on so-called companion systems. Companion systems are systems that assist a user in a multitude of day-to-day tasks, such as the aforementioned scheduling of appointments. However, the capabilities of a companion system do not stop there. Using a vast array of knowledge, these systems can also help a user with a new and unknown task, tasks that are out of a user's comfort zone. To make the most of such a system, this architecture is deployed using a range of modules, so as to make it easy to include any available device to help the user. However, the core system should be based upon a device that the user keeps with her the entire day. This could, for example, be a smartphone. This could work when every device is publicly available on a wireless link within a room, allowing a smartphone to utilize any broadcasting devices as peripheral, allowing for example that content is streamed from the smartphone to a beamer when appropriate.
 
-It is important to point out that companion systems here are not understood to be static programs; instead, they attempt to adapt to a user's preferences, behavior, knowledge, and emotional state. Apart from that they can also adapt to external influences such as time of day, situation, and any other information at disposal to the system.
+But why should we develop towards companion systems? \cite{forbus2006companion} offers some insight into the answer of this question. In that paper, the authors state that companion systems should help their users work through complex problems, retrieve relevant former cases to compare, warn of dangers or pitfalls, and show supporting evidence. The general sense to be gleamed from that statement is that companion systems should become a softening layer between the increasingly sophisticated technological world and its users, so that the usage of said technologies can be fully realized by them. And all of this should be done so that at any point, the companion system can explain its reasoning and decisions to the user while imparting the required knowledge too. To do this, the companion system must be capable of a few specific things not usually required of other AIs: namely, they require a founded combination of highly concentrated interaction\footnote{Input / Output is paramount to the function of such a system.}, profound reasoning, and continuous learning.
 
-However, it must be asked whether such a system is even feasible at the current level of technology. The system developed in the original paper is a proof of concept to this. Every year new advances allow companion systems to evolve from simple programs presenting plain static information to a system capable of holding a dialogue with a user while reacting to any input it can get its hands on. To make such a dialogue more and more realistic it becomes progressively more important to include a way for the system to explain things to a user, be that to present a reason for a decision or to further the knowledge of a user. In the future such companion systems might well make decisions for a user completely autonomously, based only on gathered working knowledge of the user.
+Teaching a computer how to reason, however, is still a larger problem that companion systems too will need to remain aware of. Concerning the continuous learning, it is important to point out that companion systems attempt to adapt to a user's preferences, behavior, knowledge, and emotional state. Apart from that they can also adapt to external influences such as time of day, situation, and any other information at disposal to the system.
+
+However, it must be asked whether such a system is even feasible at the current level of technology. The system developed in the original paper is a proof of concept to this. The prototype described in the original paper is a system capable of helping a user to hock up a TV to other devices by taking her step by step through the process. Based on this comparatively simple task, an explanation architecture as described in this paper was implemented, which not only could strengthen the user's trust in the system, increase productivity, and allow the user to learn from the companion system, but also to explain decisions that the companion system made towards reaching the goal of finishing the task.
+
+Every year new advances allow companion systems to evolve from simple programs presenting plain static information to a system capable of holding a dialogue with a user while reacting to any input it can get its hands on. To make such a dialogue more and more realistic it becomes progressively more important to include a way for the system to explain things to a user, be that to present a reason for a decision or to further the knowledge of a user. In the future such companion systems might well make decisions for a user completely autonomously, based only on gathered working knowledge of the user.
 
 The first issue that influences a cooperation between a user and the system is a user's knowledge of system features and capabilities. This can be done for example by adapting the user interface based upon whether the user is a novice or an expert, beyond simply providing helpful functions and tutorials.
 
