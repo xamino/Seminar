@@ -11,6 +11,7 @@
 \begin{document}
 
 \large
+%\Large
 
 \title{Explanation Architecture for Companion Systems}
 \author{Tamino Hartmann}
@@ -20,8 +21,11 @@
 
 \begin{abstract}
 \normalsize
+%\large
 In this paper, we take a look at how to strengthen the trust between a companion system and a user by utilizing explanations. These explanations should be constructed to fit the issue of trust at stake while acknowledging the user's own knowledge so that a learning effect can be achieved. We also look at how we can bring the system to give explanations without that the user asked for one in a dialogue, when appropriate.
 \end{abstract}
+
+\newpage
 
 \section{Introduction}
 
@@ -31,7 +35,7 @@ Changing this is the main purpose of the paper "Explanation Architecture for Com
 
 The original paper concentrates on so-called companion systems. Companion systems are systems that assist a user in a multitude of day-to-day tasks, such as the aforementioned scheduling of appointments. However, the capabilities of a companion system do not stop there. Using a vast array of knowledge, these systems can also help a user with a new and unknown task, tasks that are out of a user's comfort zone. To make the most of such a system, this architecture is deployed using a range of modules, so as to make it easy to include any available device to help the user. However, the core system should be based upon a device that the user keeps with her the entire day. This could, for example, be a smartphone. This could work when every device is publicly available on a wireless link within a room, allowing a smartphone to utilize any broadcasting devices as peripheral, allowing for example that content is streamed from the smartphone to a beamer when appropriate.
 
-But why should we develop towards companion systems? \cite{forbus2006companion} offers some insight into the answer of this question. In that paper, the authors state that companion systems should help their users work through complex problems, retrieve relevant former cases to compare, warn of dangers or pitfalls, and show supporting evidence. The general sense to be gleamed from that statement is that companion systems should become a softening layer between the increasingly sophisticated technological world and its users, so that the usage of said technologies can be fully realized by them. And all of this should be done so that at any point, the companion system can explain its reasoning and decisions to the user while imparting the required knowledge too. To do this, the companion system must be capable of a few specific things not usually required of other AIs: namely, they require a founded combination of highly concentrated interaction\footnote{Input / Output is paramount to the function of such a system.}, profound reasoning, and continuous learning.
+But why should we develop towards companion systems? \cite{forbus2006companion} offers some insight into the answer of this question. In that paper, the authors state that companion systems should help their users work through complex problems, retrieve relevant former cases to compare, warn of dangers or pitfalls, and show supporting evidence. The general sense to be gleamed from that statement is that companion systems should become a softening layer between the increasingly sophisticated technological world and its users, so that the usage of said technologies can be fully realized by them. And all of this should be done so that at any point, the companion system can explain its reasoning and decisions to the user while imparting the required knowledge too. To do this, the companion system must be capable of a few specific things not usually required of other AIs: namely, they require a founded combination of highly concentrated interaction\footnote{Input / output is paramount to the function of such a system.}, profound reasoning, and continuous learning.
 
 Teaching a computer how to reason, however, is still a larger problem that companion systems too will need to remain aware of. Concerning the continuous learning, it is important to point out that companion systems attempt to adapt to a user's preferences, behavior, knowledge, and emotional state. Apart from that they can also adapt to external influences such as time of day, situation, and any other information at disposal to the system.
 
@@ -60,7 +64,7 @@ For human trust relationships, the original paper references \cite{htc}. In it, 
 	\label{fig:hs_trust}
 \end{figure}
 
-For a human-system trust relationship, trust can be separated into nine basic constructs as seen in Figure \ref{fig:hs_trust}. Note that four constructs are left out due to representative and discriminative issues. This gives us five basic constructs of trust with which to work. Concerning the overall perceived level of trust, all five constructs must be perceived to be high. If just a single one is low, the overall trustworthiness suffers. Given that we require working knowledge of the level of trust, we need to know the levels of trust that the trustor is perceiving. This proves to be difficult though because they can only be measured with a questionnaire, which is not something a companion system can do whenever trust must be measured.
+For a human-system trust relationship, trust can be separated into nine basic constructs as seen in Figure \ref{fig:hs_trust}. Note that four constructs are left out due to representative and discriminative issues. This gives us five basic constructs of trust with which to work off. Concerning the overall perceived level of trust, all five constructs must be perceived to be high. If just a single concept of trust is low, the overall trustworthiness suffers\cite{htc}. Given that we require working knowledge of the level of trust, we need to know the levels of trust that the trustor is perceiving. This proves to be difficult though because they can only be measured with a questionnaire, which is not something a companion system can do whenever trust must be measured.
 
 To enable a companion system to at least have a broad grasp of the measure of trust, the original paper employs reinforcement learning. With it, the system tries to find a solid trade-off between the exploitation of knowledge and the exploration of new aspects. Reinforcement learning is an area of machine learning that tries to teach a system to take actions based on the goal of a perceived reward. Here, the goal likely is a higher level of trust as recognized by the companion system.
 
@@ -70,11 +74,13 @@ In the original paper, these decisions are made based on handcrafted policies, a
 
 Given that we now have a measure of trust, the next step in solving a trust issue is how to counter it. In the original paper, this is done solely by applying explanations to a situation. Simply explaining everything is not the way to do that, however – too much explanations make the usage of a companion system more a hurdle than a plus, as they could lengthen the solving of a problem with unneeded dialogue. This means that we need to know two things: what problems a user will normally face while using a companion system and which events should trigger an explanation.
 
-We also have to match the different types of trust concepts to the explanations, so that the positive effect can be maximized when giving an explanation.
+We also have to match the different types of trust concepts to the explanations, so that the positive effect can be maximized when giving an explanation. This should be done so that we do not spend too much time on explaining simple things to counter a single trust issue when one explanation can be used to counter many trust issues at the same time.
 
 \section{Explanations}
 
 To understand what the original paper is trying to do, it is necessary to know how explanations are viewed. The definition used is based off of Douglas Walton: a successful explanation is a transfer of understanding between a dialogue system in which a questioner and a respondent take part\cite{walton2004new}. 
+
+To fully understand how the original paper goes about implementing explanations in its example for a companion system, two things must be known: on which basis to select what type of explanation and where to set triggers to use an explanation.
 
 \subsection{Selecting Explanations}
 
@@ -87,17 +93,21 @@ When selecting an explanation, one must consider the goal of the explanation. Th
 	\label{fig:goals}
 \end{figure}
 
-The first one is transparency. These type of explanations help the user understand how the companion system reached a given answer. This type can be used to counteract the perceived understandability of the system. A user would likely want such an explanation whenever the thought process is not apparent, either because the answer deviates from the expected outcome or when the answer is important enough to warrant that the user needs to know all the factors the system used in reaching the answer.
+The following exposition of the explanations all use the example from the original paper. That would be a companion system that helps the user to hock up a TV to peripheral devices. Also, for sake of simplicity we have opted for active examples; examples where the system responds to a user input and not an internal stimuli such as the knowledge graph.
 
-Next is the goal of justification. Here, the user wants to be assured that the companions system has given a good, practical answer, and not just any one that would do. This explanation can be used to counter lack in perceived technical competence and perceived reliability. The system should give such an explanation when it is important for the user to understand that the system gave the best answer to a situation based on its knowledge.
+The first one is transparency. These type of explanations help the user understand how the companion system reached a given answer. This type can be used to counteract the perceived understandability of the system. A user would likely want such an explanation whenever the thought process is not apparent, either because the answer deviates from the expected outcome or when the answer is important enough to warrant that the user needs to know all the factors the system used in reaching the answer. An example of a question that needs this type of explanation is when the user asks: "How did you come to that conclusion?". To that the companion system can then transparently lay out the facts that lead it through its reasoning process.
 
-Relevance is important to reassure the user that the companion system is aware of the context an answer was sought for in and that the answer is related. This goal of explanations can be used to counter the perceived reliability.
+Next is the goal of justification. Here, the user wants to be assured that the companions system has given a good, practical answer, and not just any one that would do. This explanation can be used to counter lack in perceived technical competence and perceived reliability. The system should give such an explanation when it is important for the user to understand that the system gave the best answer to a situation based on its knowledge. An example here would be when a user asks: "Why use a HDMI cable for this connection?". Here, the companion can justify itself by explaining the available alternatives and why it chose the one it did.
 
-Another goal for of explanations is conceptualization. This is used to clarify the meaning of concepts to a user. This goal can be utilized to strengthen the perceived reliability, technical competence, and understandability all at the same time. This goal most closely resembles the transfer of knowledge from the companion system to the user.
+Relevance is important to reassure the user that the companion system is aware of the context an answer was sought for in and that the answer is related. This goal of explanations can be used to counter the perceived reliability. An example: "Why is explaining what HDMI is important for the next step?". Now the companion system has to explain why the information is relevant (possibly because it will be required for the next step, in this case).
 
-The last goal of explanations is teaching. Here, the companion system aims to teach the user something on the domain of a problem or the domain of a given answer. This goal of explanation can be used to enrich the perceived understandability, as a broader user knowledge allows the system to appear more competent to her.
+Another goal for of explanations is conceptualization. This is used to clarify the meaning of concepts to a user. This goal can be utilized to strengthen the perceived reliability, technical competence, and understandability all at the same time. This goal most closely resembles the transfer of knowledge from the companion system to the user. For example, this type of explanation can be used when a question such as "What is HDMI?" is asked, to which the system can then provide an answer.
 
-As one can see, types of explanation can follow one or more goals of explanation – meaning we can counter multiple trust issues with a single explanation if we so wish.
+The last goal of explanations is teaching. Here, the companion system aims to teach the user something on the domain of a problem or the domain of a given answer. This goal of explanation can be used to enrich the perceived understandability, as a broader user knowledge allows the system to appear more competent to her. In the given example this could be a fitting explanation to a question like: "What is a male port of a HDMI cable?" to which the companion system can teach the user the difference between the types of ports and how they look like for a HDMI cable.
+
+As one can see, types of explanation can follow one or more goals of explanation – meaning we can counter multiple trust issues with a single explanation if we so wish. This can also be used to only target specific goals when so desired.
+
+On a technical note on selecting explanations, we have to look into the architecture of a companion system. Utilizing an explanation machine to select an explanation, the system has to cope with a few uncertainties. Based on the different concepts of trust as seen in figure \ref{fig:hs_trust}, the companion can select which type of explanation it needs to raise the level of trust between it and the user. Of course, when generating the explanations within the companion system, the explanation also needs to fit into the flow of the current dialogue – this can also be used to refine the selection of explanations.
 
 \subsection{Where to Use Explanations}
 
@@ -107,11 +117,13 @@ These knowledge graphs we utilize are of significant importance to how the compa
 
 However, the knowledge base of the user is not a static construct, unlike the knowledge graph of the companion system (apart from the fact that the companion system can simply update its knowledge at any time). This is due to human nature in that we forget things and that knowledge can fade over time. This brings a degree of uncertainty into the comparison between the two knowledge graphs.
 
-To counter this, we can simply have the knowledge graph decay over time. This leads towards a situation where information that is seldom used will be explained more often, as the companion system will know that the user will most likely not remember it. Information that is used more often however will only be repeated the first few times to cement it in the user's knowledge, allowing the companion system at some point in time to pass by the explanation as the user has successfully learned this information and can now utilize it herself.\footnote{TODO: Add example?}
+To counter this, we can simply have the knowledge graph decay over time. This leads towards a situation where information that is seldom used will be explained more often, as the companion system will know that the user will most likely not remember it. Information that is used more often however will only be repeated the first few times to cement it in the user's knowledge, allowing the companion system at some point in time to pass by the explanation as the user has successfully learned this information and can now utilize it herself.
+
+An example for this decay of knowledge is given in the original paper. If an explanation about the cable type HDMI was given a few minutes ago, the companion system will reduce the explanation a further time around because it reasons that the explanation is still present in the user's knowledge; the user's knowledge graph has not yet decayed the new learned information. However, if the explanation is to be given again a few days later, the system will notice that the information has decayed and will counter that by given the full explanation again.
 
 \section{Architecture}
 
-How would the software architecture for such an explanation capable companion system look like? The original paper proposes a modular approach as seen in Figure \ref{fig:architecture}.
+How would the software architecture for such an explanation capable companion system look like? The original paper proposes a modular approach as seen in Figure \ref{fig:architecture} for a variety of reasons.
 
 \begin{figure}[H]
 	\centering
@@ -120,7 +132,7 @@ How would the software architecture for such an explanation capable companion sy
 	\label{fig:architecture}
 \end{figure}
 
-A few important points lead to the decision for a modular architecture. For one, the use of a platform independent middle-ware for the communication layer between the modules allows for a greater flexibility in how the companion system works and where the modules run, which can be used to separate different parts of the companion system onto different platforms.
+A few important points lead to the decision for a modular architecture. For one, the use of a platform independent middle-ware for the communication layer between the modules allows for a greater flexibility in how the companion system works and where the modules run, which can be used to separate different parts of the companion system onto different platforms. This platform independent middle-ware also secures trouble-free communication between the modules, even when they are on different platforms using different programming languages or running on different OS\footnote{Operating System}.
 
 As can be seen in Figure \ref{fig:architecture}, the explanation manager directly ties in with the dialogue manager. This is because explanations have little impact in how the companion system plans a task or with which media the dialogue is being conducted (these things are tasks of other modules, which in turn do not need to interface with the explanation manager in any way). Therefore, a connection to either the planning modules or the fission and fusion modules is not needed. The explanation machine itself is completely modality independent.
 
@@ -132,6 +144,7 @@ The conclusion of the original paper is that explanations are a viable way to co
 
 In the future, a companion system as has been shown in this paper will certainly become more and more sophisticated. Once research has been made into how such a system could reliably measure the trust between the user and itself, the system will only become better and better at given explanations at the appropriate times. As could be seen, constructing explanations is not the main difficulty; instead, when to give an explanation when the user has not explicitly asked for one is the challenging part. The work of the original paper clearly goes towards teaching companion systems how to act on their own, at least in a dialogue with a user.
 
+\newpage
 \bibliography{doc}
 
 \end{document}
