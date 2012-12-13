@@ -29,7 +29,7 @@
 \begin{abstract}
 \normalsize
 %\large
-In this paper, we take a look at how to strengthen the trust between a companion system and a user by utilizing explanations based on the original paper \cite{origin}. These explanations should be constructed to fit the issue of trust at stake while acknowledging the user's own knowledge so that a learning effect can be achieved. We also look at how we can bring the system to give explanations without that the user asked for one in a dialogue, when appropriate.
+In this paper, we take a look at how to strengthen the trust between a companion system and a user by utilizing explanations based on the original paper \cite{origin}. These explanations should be constructed to fit the issue of trust at stake while acknowledging the user's own knowledge so that a learning effect can be achieved. We also look at how we can bring the system to give explanations without that the user asked for one in a dialogue, when appropriate. A proposed architecture for a companion system capable of utilizing such explanations is also presented.
 \end{abstract}
 
 \newpage
@@ -46,7 +46,7 @@ But why should we develop towards companion systems? \cite{forbus2006companion} 
 
 Teaching a computer how to reason, however, is still a larger problem that companion systems too will need to remain aware of. Concerning the continuous learning, it is important to point out that companion systems attempt to adapt to a user's preferences, behavior, knowledge, and emotional state. Apart from that they can also adapt to external influences such as time of day, situation, and any other information at disposal to the system.
 
-However, it must be asked whether such a system is even feasible at the current level of technology. The system developed in the original paper is a proof of concept to this. The prototype described in the original paper is a system capable of helping a user to hock up a TV to other devices by taking her step by step through the process. Based on this comparatively simple task, an explanation architecture as described in this paper was implemented, which not only could strengthen the user's trust in the system, increase productivity, and allow the user to learn from the companion system, but also to explain decisions that the companion system made towards reaching the goal of finishing the task.
+However, it must be asked whether such a system is even feasible at the current level of technology. Significant progress towards making a system capable of reasoning and communication in human-like dialogues has been made for example in \cite{allen2001toward}. The system developed in the original paper is a proof of concept to this. The prototype described in the original paper is a system capable of helping a user to hock up a TV to other devices by taking her step by step through the process. Based on this comparatively simple task, an explanation architecture as described in this paper was implemented, which not only could strengthen the user's trust in the system, increase productivity, and allow the user to learn from the companion system, but also to explain decisions that the companion system made towards reaching the goal of finishing the task.
 
 Every year new advances allow companion systems to evolve from simple programs presenting plain static information to a system capable of holding a dialogue with a user while reacting to any input it can get its hands on. To make such a dialogue more and more realistic it becomes progressively more important to include a way for the system to explain things to a user, be that to present a reason for a decision or to further the knowledge of a user. In the future such companion systems might well make decisions for a user completely autonomously, based only on gathered working knowledge of the user.\label{adaptive_companion}
 
@@ -66,12 +66,10 @@ It becomes clear that one of the most elementary things a companion system can d
 For human trust relationships, the original paper references \cite{htc}. In it, trust is defined in three levels: ability, integrity, and benevolence. Ability describes the capacity to do something based on competencies, skills, and the characteristics of the trustee. Integrity describes perceived moral uprightness of the trustee by the trustor. Benevolence describes the disposition to do good for the trustor.
 
 \begin{figure}[H]
-	\rule{\textwidth}{0.005in}
 	\centering
 	\includegraphics[width=12cm]{trust.png}
 	\caption{This is the human-system trust model upon which the original paper founds its explanations.}
 	\label{fig:hs_trust}
-	\rule{\textwidth}{0.005in}
 \end{figure}
 
 For a human-system trust relationship, trust can be separated into nine basic constructs as seen in Figure \ref{fig:hs_trust}. Note that four constructs are left out due to representative and discriminative issues. The five concepts were chosen in the source because they represent a good 68.9\% of the variance in the data set of trust concepts that are important to the overall perceived level of trust based on a PCA\footnote{PCA stands for "Principal Component Analysis" and is a mathematical procedure for transforming a set of possibly correlated values into a smaller set of uncorrelated values.}.\cite{htc}
