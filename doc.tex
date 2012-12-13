@@ -12,6 +12,9 @@
 \setlength{\parindent}{0.0in}
 \setlength{\parskip}{0.1in}
 
+%Adjust footnote size to larger than normal text size
+\let\footnotesize\normalsize
+
 \begin{document}
 
 \large
@@ -45,12 +48,13 @@ Teaching a computer how to reason, however, is still a larger problem that compa
 
 However, it must be asked whether such a system is even feasible at the current level of technology. The system developed in the original paper is a proof of concept to this. The prototype described in the original paper is a system capable of helping a user to hock up a TV to other devices by taking her step by step through the process. Based on this comparatively simple task, an explanation architecture as described in this paper was implemented, which not only could strengthen the user's trust in the system, increase productivity, and allow the user to learn from the companion system, but also to explain decisions that the companion system made towards reaching the goal of finishing the task.
 
-Every year new advances allow companion systems to evolve from simple programs presenting plain static information to a system capable of holding a dialogue with a user while reacting to any input it can get its hands on. To make such a dialogue more and more realistic it becomes progressively more important to include a way for the system to explain things to a user, be that to present a reason for a decision or to further the knowledge of a user. In the future such companion systems might well make decisions for a user completely autonomously, based only on gathered working knowledge of the user.
+Every year new advances allow companion systems to evolve from simple programs presenting plain static information to a system capable of holding a dialogue with a user while reacting to any input it can get its hands on. To make such a dialogue more and more realistic it becomes progressively more important to include a way for the system to explain things to a user, be that to present a reason for a decision or to further the knowledge of a user. In the future such companion systems might well make decisions for a user completely autonomously, based only on gathered working knowledge of the user.\label{adaptive_companion}
 
 The first issue that influences a cooperation between a user and the system is a user's knowledge of system features and capabilities. This can be done for example by adapting the user interface based upon whether the user is a novice or an expert, beyond simply providing helpful functions and tutorials.
 
 Another issue is when the system does something that the user can not comprehend because she lacks information or knowledge. This can be dangerous to the trust the user extends towards the system, as a decrease of transparency can have ill effects, such as a decrease of using the system down to not using the system at all. The reason for this is that humans tend to only accept someone's decisions only when the reasons behind them are clear to them. This is a byproduct of a human's natural autonomy. This leads the original paper to come to the conclusion that especially in companion systems, the issues surrounding trust between a user and the system are increasingly important to uphold a user's willingness to interact with the system, which might even prevent the companion system from being used at all.
 
+\newpage
 \section{Trust}
 
 In the introduction, we reflected upon the effect of trust between a user and a companion system. To understand the problem and the solution, it is important to understand what "trust" is in this context. Several definitions exist, with the following one being the one used most frequently: trust is when one party (referenced as the trustor) is thought to be in a vulnerable situation by relying completely upon the actions of a second party (referenced as the trustee). Trust is not only an aspect to consider when looking at human interactions; trust is also relevant for the interaction between a user and a system. A definition of trust adapted to usage between a user and the system is: the extent to which a user is confident in, and willing to act on the basis of, the recommendations, actions, and decision of an artificially intelligent decision aid\cite{htc}. This definition is used because it includes but distinguishes between both the user's confidence in a system and the user's willingness to use the system to solve a problem.
@@ -70,7 +74,9 @@ For human trust relationships, the original paper references \cite{htc}. In it, 
 	\rule{\textwidth}{0.005in}
 \end{figure}
 
-For a human-system trust relationship, trust can be separated into nine basic constructs as seen in Figure \ref{fig:hs_trust}. Note that four constructs are left out due to representative and discriminative issues. This gives us five basic constructs of trust with which to work off of. Concerning the overall perceived level of trust, all five constructs must be perceived to be high. If just a single concept of trust is low, the overall trustworthiness suffers\cite{htc}. Given that we require working knowledge of the level of trust, we need to know the levels of trust that the trustor is perceiving. This proves to be difficult though because they can only be measured with a questionnaire, which is not something a companion system can do whenever trust must be measured.
+For a human-system trust relationship, trust can be separated into nine basic constructs as seen in Figure \ref{fig:hs_trust}. Note that four constructs are left out due to representative and discriminative issues. The five concepts were chosen in the source because they represent a good 68.9\% of the variance in the data set of trust concepts that are important to the overall perceived level of trust based on a PCA\footnote{PCA stands for "Principal Component Analysis" and is a mathematical procedure for transforming a set of possibly correlated values into a smaller set of uncorrelated values.}.\cite{htc}
+
+This gives us five basic constructs of trust with which to work off of. However, only the cognition-based trust concepts can be directly controlled with explanations, as affect-based trust concepts lie beyond the capabilities of the system to influence. Concerning the overall perceived level of trust, all five constructs must be perceived to be high. If just a single concept of trust is low, the overall trustworthiness suffers.\cite{htc} Given that we require working knowledge of the level of trust, we need to know the levels of trust that the trustor is perceiving. This proves to be difficult though because they can only be measured with a questionnaire, which is not something a companion system can do whenever trust must be measured – yet.
 
 To enable a companion system to at least have a broad grasp of the measure of trust, the original paper employs reinforcement learning. With it, the system tries to find a solid trade-off between the exploitation of knowledge and the exploration of new aspects. Reinforcement learning is an area of machine learning that tries to teach a system to take actions based on the goal of a perceived reward. Here, the goal likely is a higher level of trust as recognized by the companion system.
 
@@ -84,7 +90,7 @@ We also have to match the different types of trust concepts to the explanations,
 
 \section{Explanations}
 
-To understand what the original paper is trying to do, it is necessary to know how explanations are viewed. The definition used is based off of Douglas Walton: a successful explanation is a transfer of understanding between a dialogue system in which a questioner and a respondent take part\cite{walton2004new}. 
+To understand what the original paper is trying to do, it is necessary to know how explanations are viewed. The definition used is based off of Douglas Walton: a successful explanation is a transfer of understanding between a dialogue system in which a questioner and a respondent take part.\cite{walton2004new}
 
 To fully understand how the original paper goes about implementing explanations in its example for a companion system, two things must be known: on which basis to select what type of explanation and where to set triggers to use an explanation in a dialogue.
 
@@ -99,7 +105,7 @@ When selecting an explanation, one must consider the goal of the explanation. Th
 	\label{fig:goals}
 \end{figure}
 
-The following exposition of the explanations all use the example from the original paper. That would be a companion system that helps the user to hock up a television device to peripheral devices such as a Blu ray player or television tuner. Also, for sake of simplicity we have opted for active examples; examples where the system responds to a user input and not an internal stimuli such as the knowledge graph mentioned later in \ref{know_graph}.
+The following exposition of the explanations all use the example from the original paper. That would be a companion system that helps the user to hock up a television device to peripheral devices such as a Blu ray player or television tuner. Also, for sake of simplicity we have opted for active examples; examples where the system responds to a user input and not an internal stimuli such as the knowledge graph mentioned later in Section \ref{know_graph}.
 
 The first goal for explanations is transparency. These type of explanations help the user understand how the companion system reached a given answer. This type can be used to counteract the perceived understandability of the system. A user would likely want such an explanation whenever the thought process is not apparent, either because the answer deviates from the expected outcome or when the answer is important enough to warrant that the user needs to know all the factors the system used in reaching the answer. An example of a question that needs this type of explanation is when the user asks: "How did you come to that conclusion?". To that the companion system can then transparently lay out the facts that lead it through its reasoning process.
 
@@ -134,22 +140,46 @@ How would the software architecture for such an explanation capable companion sy
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=10cm]{arch.png}
+	\includegraphics[width=12cm]{arch.png}
 	\caption{Overview of the proposed modular architecture for the companion architecture.}
 	\label{fig:architecture}
 \end{figure}
 
-A few important points lead to the decision for a modular architecture. For one, the use of a platform independent middle-ware for the communication layer between the modules allows for a greater flexibility in how the companion system works and where the modules run, which can be used to separate different parts of the companion system onto different platforms. This platform independent middle-ware also secures trouble-free communication between the modules, even when they are on different platforms using different programming languages or running on different OS\footnote{Operating System}.
+A few important points lead to the decision for a modular architecture. For one, the use of a platform independent middle-ware for the communication layer between the modules allows for a greater flexibility in how the companion system works and where the modules run, which can be used to separate different parts of the companion system onto different platforms. This platform independent middle-ware also secures trouble-free communication between the modules, even when they are on different platforms using different programming languages or running on different OS\footnote{Operating System}. The original paper utilized the SEMAINE API for this.\cite{schroder2010semaine}
 
-As can be seen in Figure \ref{fig:architecture}, the explanation manager directly ties in with the dialogue manager. This is because explanations have little impact in how the companion system plans a task or with which media the dialogue is being conducted (these things are tasks of other modules, which in turn do not need to interface with the explanation manager in any way). Therefore, a connection to either the planning modules or the fission and fusion modules is not needed. The explanation machine itself is completely modality independent.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm]{expl_arch.png}
+	\caption{Close look at the proposed explanation architecture. The dialogue manager processes the explanation requests which are forwarded to the explanation manager. All required information comes from the knowledge base.}
+	\label{fig:expl_architecture}
+\end{figure}
+
+As can be seen in Figure \ref{fig:expl_architecture}, the explanation manager directly ties in with the dialogue manager. This is because explanations have little impact in how the companion system plans a task or with which media the dialogue is being conducted (these things are tasks of other modules, which in turn do not need to interface with the explanation manager in any way). Therefore, a connection to either the planning modules or the fission and fusion modules is not needed. The explanation machine itself is completely modality independent.
 
 Therefore, the dialogue manager is in charge of deciding when an explanation is required. The explanation manager then analyzes the explanation request based on how the user goals map to the explanation goals and, of course, on what content the user needs to have explained. Then it selects an appropriate explanation machine, which is then transformed to an explanation dialogue goal. All information that is required in these steps comes from the knowledge base of the companion system. The finished explanation is then passed back to the dialogue manager which builds it into the dialogue with the user.
 
+Apart from the explanation manager, the planner and the dialogue manager are also important parts of the architecture of the proposed modular setup for a companion system. The complete steps from plan to execution can be seen in Figure \ref{fig:planner} – note that the explanation manager is not shown as it is an extra feature not strictly required for the process.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm]{planner.png}
+	\caption{The path from plan to dialogue.}
+	\label{fig:planner}
+\end{figure}
+
+The planner is the module that, given a problem to solve, has to create a plan to solve the given problem – not an easy task, although research has been ongoing as to be seen in \cite{seegebarth2011formale}. Such research has the goal of allowing algorithms to be created that can solve problems in a given domain field on par with human experts. Such research is made generally for all planing systems, of which companion systems are but a sub-group.
+
+The dialogue manager receives only the abstract steps of the plan from the before mentioned planner and creates a dialogue from it so that the user can solve the given problem. The abstract plan is not enough to create the dialogue, however. The dialogue has to instruct the user on how to solve the task in an adapted and tailored for the user way. The dialogue manager should also closely interact with the explanation manager, of course, and should the plan need to amended, it will need to interact with the planner again. Note that this means that the dialogue is not static; it can be changed during run-time to accommodate new circumstances, thus allowing the companion system to adapt as required in Section \ref{adaptive_companion}.
+
+Finally, for actually making the companion system capable of holding a natural dialogue with the user, fusion and fission modules are required. Not only to they abstract the input and output mechanisms for the rest of the system, they are also used to interpret and create natural speech for the communication with the user. Such beautification is done by a natural language pipeline, as seen in \cite{reiter2000building}.
+
 \section{Conclusion}
 
-The conclusion of the original paper is that explanations are a viable way to counter trust issues. Not only is it possibly to implement such a companion system, it also works quite well. However, further research must be done, especially on the handling of trust issues so that the explanation pipeline can be further refined.
+The conclusion of the original paper is that explanations are a viable way to counter trust issues and that companion systems should contain explanation capabilities. It is also pointed out that companion systems can benefit from multimodal input from different sources, given by the fusion module. They also state that it is apparent that there can not be just a single pipeline for explanations, as the events triggering explanations vary in their demands and their contents. Further research must be done, especially on the handling of trust issues so that the explanation pipeline can be further refined. The connection between bases of trust and explanation machines must also be verified in further experiments, hopefully leading to well-founded selection strategies when choosing an explanation.
 
-In the future, a companion system as has been shown in this paper will certainly become more and more sophisticated. Once research has been made into how such a system could reliably measure the trust between the user and itself, the system will only become better and better at given explanations at the appropriate times. As could be seen, constructing explanations is not the main difficulty; instead, when to give an explanation when the user has not explicitly asked for one is the challenging part. The work of the original paper clearly goes towards teaching companion systems how to act on their own, at least in a dialogue with a user.
+The original paper also defends its use of a modular architecture, stating that it has definite beneficial sides for an adaptive companion system, as the modular approach allows an easier implementation of the adaptive dialogue structure required.
+
+In the future, a companion system as has been shown in this paper will certainly become more and more sophisticated. Once research has been made into how such a system could reliably measure the trust between the user and itself, the system will only become better and better at giving explanations at the appropriate times within a natural dialogue with a user. As could be seen, constructing explanations is not the main difficulty; instead, when to give an explanation when the user has not explicitly asked for one is the challenging part; also what type of explanation to give based on which trust bases remains challenging. The work of the original paper clearly goes towards teaching companion systems how to act on their own, at least in a dialogue with a user.
 
 \newpage
 \bibliography{doc}
